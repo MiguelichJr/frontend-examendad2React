@@ -18,7 +18,7 @@ class BuscarCliente extends Component {
         
     }
 
-    getClienteByDni() {
+    getClienteByDni() { 
         var dni=document.getElementById("dni").value;
         axios.get(API_BASE_URL + '/buscarCliente/'+dni).then(function (response){
             clientes=[];
