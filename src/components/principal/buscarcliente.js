@@ -20,9 +20,9 @@ class BuscarCliente extends Component {
 
     getClienteByDni() {
         var dni=document.getElementById("dni").value;
-        axios.get(API_BASE_URL + '/persona/buscarpersonaporDNI/'+dni).then(function (response){
+        axios.get(API_BASE_URL + '/buscarCliente/'+dni).then(function (response){
             clientes=[];
-            clientes.push(response.data);
+            clientes.push(response.data); 
             if(response.data==[]){
                 console.log("DNI no valido/Persona no encontrada");
             }
