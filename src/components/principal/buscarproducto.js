@@ -25,6 +25,7 @@ class BuscarProducto extends Component {
     getProductos = () => {
         axios.get(API_BASE_URL + '/listarProductos').then(function (response){
             productos.push(response.data);
+            console.log(productos);
         }).catch(function (error){
             console.log(error);
         })
