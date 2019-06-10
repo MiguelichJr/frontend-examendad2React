@@ -18,7 +18,7 @@ class NavBar extends Component {
                             <a className="nav-link">Sistema de Ventas<span className="sr-only">(current)</span></a>
                         </li>
                     </ul>
-                    <a className="nav-link">Emanuel Pinaud<span className="sr-only">(current)</span></a>
+                    <a className="nav-link">Owen Mejia<span className="sr-only">(current)</span></a>
                     <form className="form-inline my-2 my-lg-0">
                         <button className="btn btn-outline-danger my-2 my-sm-0 btn-block">
                             <i className="fas fa-sign-out-alt"></i>
