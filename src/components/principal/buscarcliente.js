@@ -21,8 +21,8 @@ class BuscarCliente extends Component {
     getClienteByDni() {
         var dni=document.getElementById("dni").value;
         axios.get(API_BASE_URL + '/buscarCliente/'+dni).then(function (response){
-            clientes=[]; 
-            clientes.push(response.data); 
+            clientes=[];
+            clientes.push(response.data);
             if(response.data==[]){
                 console.log("DNI no valido/Persona no encontrada");
             }
@@ -56,9 +56,10 @@ class BuscarCliente extends Component {
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Datos Del Cliente</h5>
+                        <hr></hr>
                         <div className="form-group">
                             <div className="row">
-                                <div className="col-3">
+                                <div className="col-9">
                                     <input 
                                     type="text" 
                                     className="form-control" 
@@ -68,25 +69,49 @@ class BuscarCliente extends Component {
                                     maxLength="8"
                                     id="dni" />
                                 </div>
-                                <div className="col-1">
+                                <div className="col-3">
                                     <button 
                                     type="button" 
-                                    className="btn btn-outline-success btn-block"
+                                    className="btn btn-primary btn-block"
                                     onClick={this.getClienteByDni}>
                                         <i className="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <div className="col-3">
+                                </div>
+                                <br></br>
+                                <div className="row">
+                                <div className="col-12">
                                     <input type="hidden" id="idpersona" value={this.state.clienteEncontrado.idpersona}/>
                                     <input type="text" className="form-control" placeholder="Nombres" id="nom" value={this.state.clienteEncontrado.nombres} required disabled />
                                 </div>
-                                <div className="col-3">
+                                <br></br>
+                                <br></br>
+                                </div>
+                                <div className="row">
+                                <div className="col-12">
                                     <input type="text" className="form-control" placeholder="Apellidos" id="ape" value={this.state.clienteEncontrado.apellidos} required disabled />
                                 </div>
-                                <div className="col-2">
+                                <br></br>
+                                <br></br>
+                                </div>
+                                <div className="row">
+                                <div className="col-12">
                                     <input tsype="text" className="form-control" id="fecha" value={ this.state.date } required disabled />
                                 </div>
-                            </div>
+                                </div>
+                                {
+                               // <div className="col-3">
+                                //    <input type="hidden" id="idpersona" value={this.state.clienteEncontrado.idpersona}/>
+                                //    <input type="text" className="form-control" placeholder="Nombres" id="nom" value={this.state.clienteEncontrado.nombres} required disabled />
+                               // </div>
+                               // <div className="col-3">
+                               //     <input type="text" className="form-control" placeholder="Apellidos" id="ape" value={this.state.clienteEncontrado.apellidos} required disabled />
+                               // </div>
+                               // <div className="col-2">
+                               //     <input tsype="text" className="form-control" id="fecha" value={ this.state.date } required disabled />
+                               // </div>
+                                }
+                            
                         </div>
                     </div>
                 </div>

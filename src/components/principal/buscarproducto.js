@@ -3,6 +3,7 @@ import Carrito from './carrito';
 import axios from 'axios';
 import Reportes from './reportes';
 import { API_BASE_URL } from '../../config';
+import unionpe from './union.jpg';
 
 let parseo = [];
 let carrito = [];
@@ -23,9 +24,8 @@ class BuscarProducto extends Component {
     }
 
     getProductos = () => {
-        axios.get(API_BASE_URL + '/listarProductos').then(function (response){
+        axios.get(API_BASE_URL + '/producto/listar').then(function (response){
             productos.push(response.data);
-            console.log(productos);
         }).catch(function (error){
             console.log(error);
         })
@@ -205,6 +205,14 @@ class BuscarProducto extends Component {
    
 
     render() {
+        const stiloscarritototalproductos={marginLeft:"-380px",marginTop:"10px"}
+
+        const botoncito={marginTop:"10px"}
+
+        const sisisi={width:"650px",marginLeft:"-300px",borderRadius:"20px",marginBottom:"30px",height:"320px"}
+
+        const reportespepep={height:"500px"}
+ 
         const listadeProducto = this.state.listaDeProductos.map((item, index) => {
             return (
                 <tr key={item.idproducto}>
@@ -235,7 +243,7 @@ class BuscarProducto extends Component {
                     <th>{item.precio}</th>
                     <th>
                         <button className="btn btn-danger" onClick={this.eliminarProducto.bind(this, index,item.codigo,item.cantidad)}>
-                            Quitar
+                            Eliminar
                         </button>
                     </th>
                 </tr>
@@ -253,8 +261,8 @@ class BuscarProducto extends Component {
                                     <input type="text" maxLength="3" className="form-control" id="codigo" />
                                 </div>
                                 <div className="col-3">
-                                    <button type="button" className="btn btn-outline-primary btn-block" onClick={this.buscarProducto}>
-                                        Buscar Productos<i className="fas fa-cart-plus"></i>
+                                    <button type="button" className="btn btn-primary btn-block" onClick={this.buscarProducto}>
+                                        Buscar
                                     </button>
                                 </div>
                             </div>
@@ -286,16 +294,28 @@ class BuscarProducto extends Component {
                     </div>
                 </div>
                 <br></br>
-                <div className="col-12 text-center">
-                    <Carrito data={listadeCompras} />
-                    <br></br>
-                    <button className="btn btn-dark" onClick={this.registrarVenta}>Registrar Venta</button>
+                    <div style={stiloscarritototalproductos}>
+                    <Carrito  data={listadeCompras} />
+                    <button style={botoncito} className="btn btn-primary" onClick={this.registrarVenta}>Realizar Venta</button>
 
+                    </div>
+                    
+                    <br></br>
+                    
+               
+              
+
+                <div className="row">
+                    <div className="col-6">
+                        <img src={unionpe} style={sisisi}></img>
+                    </div>
+                    <div className="col-6">
+                    <Reportes  subtotal={this.state.subtotal}/>
+                    </div>
                 </div>
-                <br></br>
-                <div className="col-12">
-                    <Reportes subtotal={this.state.subtotal} />
-                </div>
+
+                    
+                
             </div>
         );
     }

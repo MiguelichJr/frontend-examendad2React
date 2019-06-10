@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 class Carrito extends Component {
     render() {
         return (
+            <div className="row">
+            <div className="col-12">
             <div className="card">
                 <div className="card-body">
-                <h5 className="card-title text-center">Productos que va a llevar: </h5>
+                <h5 className="card-title text-center"> </h5>
 
                         <table className="table table-bordered">
                             <thead>
@@ -24,7 +26,8 @@ class Carrito extends Component {
                         </table>
                     </div>
                 </div>
-            
+                </div>
+                </div>
             
         )
     }

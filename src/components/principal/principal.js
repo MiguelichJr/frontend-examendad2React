@@ -8,13 +8,15 @@ class Principal extends Component {
         return (
             <div className="contenedorww">
                 <div className="row">
+                    <div className="col-4">
                     <BuscarCliente />
-                </div>
-                <br />
-                <div className="row">
+                    </div>
+                    <div className="col-8">
                     <BuscarProducto />
+                    </div>
+                    
                 </div>
-                <br />
+                
                 <div className="row">
                     
                 </div>
