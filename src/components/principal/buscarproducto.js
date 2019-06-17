@@ -209,7 +209,7 @@ class BuscarProducto extends Component {
 
         const botoncito={marginTop:"10px"}
 
-        const sisisi={width:"650px",marginLeft:"-300px",borderRadius:"20px",marginBottom:"30px",height:"320px"}
+        const sisisi={width:"500px",marginLeft:"-300px",borderRadius:"20px",marginBottom:"30px",height:"320px"}
 
         const reportespepep={height:"500px"}
  
@@ -230,7 +230,7 @@ class BuscarProducto extends Component {
                 </tr>
 
             );
-        });
+        }); 
 
         const listadeCompras = this.state.listaDeCompras.map((item, index) => {
            
@@ -306,10 +306,10 @@ class BuscarProducto extends Component {
               
 
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-4">
                         <img src={unionpe} style={sisisi}></img>
                     </div>
-                    <div className="col-6">
+                    <div className="col-8">
                     <Reportes  subtotal={this.state.subtotal}/>
                     </div>
                 </div>
