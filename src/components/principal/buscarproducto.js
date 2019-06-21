@@ -9,6 +9,7 @@ let parseo = [];
 let carrito = [];
 let productos = [];
 let repor=[];
+let carrito_vacio=[];
 
 class BuscarProducto extends Component {
     constructor(props) {
@@ -28,11 +29,13 @@ class BuscarProducto extends Component {
             productos.push(response.data);
         }).catch(function (error){
             console.log(error);
-        })
+        }) 
         this.setState({
             listaDeProductos:productos
         })
     }
+    
+
 
     buscarProducto = (e) => {
         var codigo = document.getElementById("codigo").value;
@@ -47,7 +50,7 @@ class BuscarProducto extends Component {
                 });
             }
             
-        }
+        } 
 
     }
     validarCantidad(event){
@@ -81,7 +84,7 @@ class BuscarProducto extends Component {
                 idproducto: idp,
                 codigo: arguments[1],
                 nom_producto: arguments[2],
-                precio: arguments[3],
+                precio: arguments[3], 
                 cantidad: cant
             }
             var array = [];
@@ -169,40 +172,92 @@ class BuscarProducto extends Component {
     }
 
     registrarVenta(){
-        var idventas=1;
+        alert("si entra en el metodo si")
+        
+        //var idventas=1;
         var idcliente=document.getElementById("idpersona").value;
-        var idpersona=1;
+        var idpersona=1; 
         if(idcliente<=0){
             alert("Datos de cliente requeridos");
         }else{ 
-            if(idcliente==idpersona){
+            if(idcliente===idpersona){
                 alert("Persona no válida, no puede vender productos a si mismo");
             }else{
+                alert("Persona valida pe"); 
+                //alert(carrito);
+                /*
                 for(var i in carrito){
                     var idproducto=carrito[i]["idproducto"];
                     var precio=carrito[i]["precio"];
                     var cantidad=carrito[i]["cantidad"];
-                
-                    axios.post(API_BASE_URL + '/ventas/creardetalletotal/'+idcliente+'/'+idpersona,[{
-                        "cantidad":cantidad,
-                        "idproducto":idproducto,
-                        "idventas":idventas,
-                        "preciototal":precio
-                    }], {
+                    alert(idproducto+" "+precio+" "+cantidad); 
+                } */
+                //alert(idproducto+" "+precio+" "+cantidad);
+                //alert("el id del cliente es: "+idcliente);
+                //alert("el id del vendedor es: "+idpersona);
+                //alert("el id del cliente es: "+idcliente);
+                    axios.post(API_BASE_URL + '/registrarVenta',{
+                        "idcliente":2,
+                        "idvendedor":1  
+                    }, {
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json'
                         }
                     }).then(function (response) {
+                            //alert("Registro Exitoso")
                             console.log(response.data);
+                    }).catch(function (error) {
+                         console.log(error);
+                    });  
+                    
+                for(var i in carrito){ 
+                    var idproducto=carrito[i]["idproducto"];
+                    var precio=carrito[i]["precio"];
+                    var cantidad=carrito[i]["cantidad"];
+                    var preciom=precio*cantidad;
+                    //alert("El idproducto: "+idproducto)
+                    //alert("El precio: "+precio)
+                    //alert("La cantidad: "+cantidad) 
+                    //alert("La posicion del array es "+i+"..... el idproducto es: "+idproducto+"..... el precio es: "+precio+"...la cantidad es: "+cantidad+" El precio multiplicado es: "+preciom)
+                    
+                    axios.post(API_BASE_URL + '/registrarDetalleVenta',{
+                        "cantidad":cantidad,
+                        "idproducto":idproducto,
+                        "precio":preciom
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    }).then(function (response) {
+                       // alert("siiiiii Array "+i);
+                       // alert("La posicion del array es "+i+"..... el idproducto es: "+idproducto+"..... el precio es: "+precio+"...la cantidad es: "+cantidad+" El precio multiplicado es: "+preciom);
+                        //document.getElementById("codigo").value="";
+                        //carrito=[];
+                        //window.location.reload(); 
+                       // this.LimpiarTabla();  
+                        console.log(response.data);
                     }).catch(function (error) {
                         console.log(error);
                     });
-                }
-            } 
-        }
+                }               
+                
+            }  
+        } 
+        //window.location.reload();
     }
-   
+    /* 
+    LimpiarTabla(){
+        alert("si llega l otro metodo");
+        
+        
+        carrito_vacio=[];
+        carrito.push(carrito_vacio); 
+        this.setState({
+            listaDeCompras:carrito
+        })
+    }*/ 
 
     render() {
         const stiloscarritototalproductos={marginLeft:"-380px",marginTop:"10px"}

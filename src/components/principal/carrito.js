@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
 class Carrito extends Component {
+    componentWillReceiveProps(nextProps){
+        if (nextProps.initialCount && nextProps.initialCount > this.state.count){
+          this.setState({
+            count : nextProps.initialCount
+          });
+        }
+      }
     render() {
         return (
             <div className="row">
@@ -24,7 +31,7 @@ class Carrito extends Component {
                             {this.props.data}
                             </tbody>                           
                         </table>
-                    </div>
+                    </div> 
                 </div>
                 </div>
                 </div>

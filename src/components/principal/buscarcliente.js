@@ -20,7 +20,7 @@ class BuscarCliente extends Component {
     }
 
     componentDidMount() {
-        this.getPersonas();
+        this.getPersonas(); 
     }
 
     getPersonas = () =>{
@@ -48,15 +48,15 @@ class BuscarCliente extends Component {
             console.log(error);
             alert("Ocurrió un problema al traer a los clientes");
         })*/ 
-        alert(dni);
+        //alert(dni);
         for(var i in clientes[0]){
-            console.log(clientes[0]);
-            var a=parseInt(clientes[0][i]["dni"]);
-            if(a==dni){
+            //console.log(clientes[0]);
+            var a=parseInt(clientes[0][i]["dni"]); 
+            if(a==dni){ 
                 var data=clientes[0][i];
                parseow = [];
                parseow.push(data);
-               console.log(parseow);
+               //console.log(parseow);
                 this.setState({
                     clienteEncontrado:parseow[0]
                 })
