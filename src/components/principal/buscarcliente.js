@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../config';
 
 let clientes=[];
-
+let parseow = [];
 class BuscarCliente extends Component {
 
     constructor() {
@@ -12,43 +12,58 @@ class BuscarCliente extends Component {
             date =  today.getDate() + ' / ' + (today.getMonth() + 1) + ' / ' + today.getFullYear();
         this.state = {
             date : date,
-            clienteEncontrado: []
+            clienteEncontrado: [],
+            ListaPersonas: []
         }
         this.getClienteByDni = this.getClienteByDni.bind(this);
         
     }
 
-    getClienteByDni() { 
-        var dni=document.getElementById("dni").value;
-        axios.get(API_BASE_URL + '/buscarCliente/'+dni).then(function (response){
-            clientes=[];
+    componentDidMount() {
+        this.getPersonas();
+    }
+
+    getPersonas = () =>{
+        axios.get(API_BASE_URL + '/listarClientes').then(function (response){
             clientes.push(response.data);
+        }).catch(function (error){
+            console.log(error);
+        })
+        this.setState({
+            ListaPersonas:clientes  
+        })
+    }
+
+
+    getClienteByDni = (e) =>{ 
+        var dni=document.getElementById("dni").value;
+        /*
+        axios.get(API_BASE_URL + '/buscarCliente/'+dni).then(function (response){
+            clientes.push(response.data);
+            
             if(response.data==[]){
                 console.log("DNI no valido/Persona no encontrada");
             }
         }).catch(function (error){
             console.log(error);
             alert("Ocurrió un problema al traer a los clientes");
-        })
+        })*/ 
+        alert(dni);
         for(var i in clientes[0]){
             console.log(clientes[0]);
-            if(clientes[0][0]["dni"]==dni){
-                var data={
-                    idpersona:clientes[0][i]["idpersona"],
-                    nombres:clientes[0][i]["nombres"],
-                    apellidos:clientes[0][i]["apellidos"],
-                    telefono:clientes[0][i]["telefono"]
-                }
+            var a=parseInt(clientes[0][i]["dni"]);
+            if(a==dni){
+                var data=clientes[0][i];
+               parseow = [];
+               parseow.push(data);
+               console.log(parseow);
                 this.setState({
-                    clienteEncontrado:data
+                    clienteEncontrado:parseow[0]
                 })
-            }else{
-                alert("DNI no valido/Persona no encontrada");
-            
             }
         }
         
-    }
+    } 
 
     render() {
         return (
@@ -119,5 +134,4 @@ class BuscarCliente extends Component {
         );
     }
 }
-
 export default BuscarCliente;
